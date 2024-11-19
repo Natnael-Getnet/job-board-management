@@ -1,11 +1,11 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
-import { defineProps } from 'vue'
+import { defineProps } from "vue";
 
 defineProps({
-  title: { type: String, default: 'Become a Vue Dev' },
-  subtitle: { type: String, default: 'Find the Vue job that fits your skills and needs' },
-})
+  title: { type: String, default: "Become a Vue Dev" },
+  subtitle: { type: String, default: "Find the Vue job that fits your skills and needs" },
+});
 </script>
 
 <template>

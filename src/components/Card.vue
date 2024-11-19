@@ -1,10 +1,10 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
-import { defineProps } from 'vue'
+import { defineProps } from "vue";
 
 defineProps({
-  bgColor: { type: String, default: 'bg-gray-100' },
-})
+  bgColor: { type: String, default: "bg-gray-100" },
+});
 </script>
 
 <template>
