@@ -1,5 +1,5 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import NavBar from './components/NavBar.vue'
+</script>
 
-<template>
-  <h1 class="text-3xl font-bold text-gray-800">Vue Job</h1>
-</template>
+<template><NavBar /></template>
