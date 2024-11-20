@@ -1,15 +1,29 @@
 <script setup lang="ts">
-import { defineProps } from "vue";
+import { defineProps, ref, computed } from "vue";
 
-defineProps({
-  job: {
-    type: { type: String, required: true },
-    title: { type: String, required: true },
-    description: { type: String, required: true },
-    salary: { type: String, required: true },
-    location: { type: String, required: true },
-    id: { type: Number, required: true },
-  },
+interface Job {
+  title: string;
+  description: string;
+  type: string;
+  salary: string;
+  location: string;
+  id: number;
+}
+
+const props = defineProps<{
+  job: Job;
+}>();
+
+const showFullDescription = ref(false);
+
+const toggleFullDescription = () => {
+  showFullDescription.value = !showFullDescription.value;
+};
+
+const truncatedDescription = computed(() => {
+  let description = props.job.description;
+  description = showFullDescription.value ? description : description.slice(0, 100) + "...";
+  return description;
 });
 </script>
 
@@ -22,7 +36,12 @@ defineProps({
       </div>
 
       <div class="mb-5">
-        {{ job.description }}
+        <div>
+          {{ truncatedDescription }}
+        </div>
+        <button @click="toggleFullDescription" class="text-sm text-green-500 hover:text-green-600">
+          {{ showFullDescription ? "Less" : "More" }}
+        </button>
       </div>
 
       <h3 class="text-green-500 mb-2">{{ job.salary }}</h3>
