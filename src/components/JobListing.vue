@@ -8,6 +8,12 @@ interface Job {
   salary: string;
   location: string;
   id: number;
+  company: {
+    name: string;
+    description: string;
+    contactEmail: string;
+    contactPhone: string;
+  };
 }
 
 const props = defineProps<{
