@@ -2,7 +2,7 @@
 import BackButton from "@/components/BackButton.vue";
 import axios from "axios";
 import { onMounted, reactive } from "vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 
 interface Job {
   title: string;
@@ -20,12 +20,27 @@ interface Job {
 }
 
 const route = useRoute();
+const router = useRouter();
 const jobId = route.params.id;
 
 const state = reactive({
   job: {} as Job,
   isLoading: true,
 });
+
+const deleteJob = async () => {
+  try {
+    const confirm = window.confirm("Are you sure you want to delete this job?");
+
+    if (confirm) {
+      await axios.delete(`/api/jobs/${jobId}`);
+      router.push("/jobs");
+      console.log("Job id", jobId);
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 onMounted(async () => {
   try {
@@ -99,6 +114,7 @@ onMounted(async () => {
               >Edit Job</RouterLink
             >
             <button
+              @click="deleteJob"
               class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline mt-4 block"
             >
               Delete Job
