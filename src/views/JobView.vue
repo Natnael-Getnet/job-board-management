@@ -3,6 +3,7 @@ import BackButton from "@/components/BackButton.vue";
 import axios from "axios";
 import { onMounted, reactive } from "vue";
 import { useRoute, useRouter } from "vue-router";
+import { useToast } from "vue-toastification";
 
 interface Job {
   title: string;
@@ -21,6 +22,8 @@ interface Job {
 
 const route = useRoute();
 const router = useRouter();
+const toast = useToast();
+
 const jobId = route.params.id;
 
 const state = reactive({
@@ -34,8 +37,8 @@ const deleteJob = async () => {
 
     if (confirm) {
       await axios.delete(`/api/jobs/${jobId}`);
+      toast.success("Job deleted successfully!");
       router.push("/jobs");
-      console.log("Job id", jobId);
     }
   } catch (error) {
     console.error(error);
