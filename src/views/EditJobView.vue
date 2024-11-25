@@ -63,21 +63,21 @@ onMounted(async () => {
 });
 
 const handleSubmit = async () => {
-  const updatedJob = {
-    title: form.title,
-    description: form.description,
-    type: form.type,
-    salary: form.salary,
-    location: form.location,
-    company: {
-      name: form.company.name,
-      description: form.company.description,
-      contactEmail: form.company.contactEmail,
-      contactPhone: form.company.contactPhone,
-    },
-  };
-
   try {
+    const updatedJob = {
+      title: form.title,
+      description: form.description,
+      type: form.type,
+      salary: form.salary,
+      location: form.location,
+      company: {
+        name: form.company.name,
+        description: form.company.description,
+        contactEmail: form.company.contactEmail,
+        contactPhone: form.company.contactPhone,
+      },
+    };
+
     const response = await axios.put(`/api/jobs/${jobId}`, updatedJob);
     toast.success("Job updated successfully!");
     router.push(`/jobs/${response.data.id}`);
